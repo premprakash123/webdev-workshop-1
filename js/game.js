@@ -1,7 +1,7 @@
 // global consts
 const TRIVIA_API_URL = "https://opentdb.com/api.php?amount=1&category=11&difficulty=easy&type=multiple"; // see https://opentdb.com/api_config.php
 const TENOR_API_URL = "https://g.tenor.com/v1/search?q=QUERY&key=API_KEY&limit=10";
-const TENOR_API_KEY = ""; // you need to add your own API key from Tenor and replace API_KEY in TENOR_API_URL. See https://tenor.com/gifapi
+const TENOR_API_KEY = "FIVJE9C9U2QZ"; // you need to add your own API key from Tenor and replace API_KEY in TENOR_API_URL. See https://tenor.com/gifapi
 
 function on_page_load() {
     console.log("Page has loaded ...");
@@ -39,16 +39,17 @@ function update_question_ui(question_text,correct_answer,incorrect_answers){
 }
 function fetch_image(correct_answer){
     console.log("Fetch image...");
-    fetch(TENOR_API_URL)
+    fetch(TENOR_API_URL.replace("QUERY", correct_answer.replace(API_KEY,"FIVJE9C9U2QZ")))
     .then(response => response.json())
       .then(data => {
           console.log(data);
-          const question_text = data["results"][0]["question"];
-          const correct_answer = data["results"][0]["correct_answer"];
-          const incorrect_answers = data["results"][0]["incorrect_answers"];
-          on_question_fetched(question_text,correct_answer,incorrect_answers);
+         // const image_url = data 
       });
 
+}
+function update_image_ui(){
+    console.log("fetch image...");
+    fetch_image();
 }
 
 
